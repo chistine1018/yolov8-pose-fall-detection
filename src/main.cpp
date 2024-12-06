@@ -16,9 +16,9 @@
 //#define YOLOV8_PARAM "/home/hit/Project/yolov8-pose-human/weights/yolov8-pose-human-opt.param"
 //#define YOLOV8_BIN "/home/hit/Project/yolov8-pose-human/weights/yolov8-pose-human-opt.bin"
 //#define SAVE_PATH "/home/hit/Project/yolov8-pose-human/outputs"
-#define YOLOV8_PARAM "C:/Users/user/Downloads/OtherProject/DeepLearning/ncnn_windows_fall_detect/yolov8-pose-fall-detection/weights/yolov8-pose-human-opt.param"
-#define YOLOV8_BIN "C:/Users/user/Downloads/OtherProject/DeepLearning/ncnn_windows_fall_detect/yolov8-pose-fall-detection/weights/yolov8-pose-human-opt.bin"
-#define SAVE_PATH "C:/Users/user/Downloads/OtherProject/DeepLearning/ncnn_windows_fall_detect/yolov8-pose-fall-detection/outputs"
+#define YOLOV8_PARAM "C:/Users/user/Downloads/OtherProject/DeepLearning/ncnn_windows_fall_detect_byAnson/weights/yolov8-pose-human-opt.param"
+#define YOLOV8_BIN "C:/Users/user/Downloads/OtherProject/DeepLearning/ncnn_windows_fall_detect_byAnson/weights/yolov8-pose-human-opt.bin"
+#define SAVE_PATH "C:/Users/user/Downloads/OtherProject/DeepLearning/ncnn_windows_fall_detect_byAnson/outputs"
 
 std::unique_ptr<Yolov8Pose> yolov8Pose(new Yolov8Pose(YOLOV8_PARAM, YOLOV8_BIN, false));
 
