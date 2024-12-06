@@ -1,0 +1,70 @@
+cmake_minimum_required(VERSION 3.10.1)
+project(yolov8-pose)
+
+set(project_name yolov8-pose)
+set(project_root ${PROJECT_SOURCE_DIR})
+set(project_src ${project_root}/src)
+set(project_include ${project_root}/include)
+set(EXECUTABLE_OUTPUT_PATH ${project_root}/bin)
+
+option(CUDA_USE_STATIC_CUDA_RUNTIME OFF)
+set(CMAKE_CXX_STANDARD 11)
+add_definitions(-std=c++11)
+add_definitions(-pthread)
+
+find_package(OpenMP REQUIRED)
+if(OpenMP_FOUND)
+    message("OpenMP found")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
+endif()
+
+#set(OpenCV_DIR "/home/hit/Softwares/opencv-3.4.10/build")
+
+set(OpenCV_DIR "C:/Users/user/Downloads/opencv/build/x64/vc15/lib")
+#C:\Users\user\Downloads\opencv\sources\cmake
+find_package(OpenCV REQUIRED)
+
+#set(Eigen_DIR "/home/hit/Softwares/eigen-3.3.9")
+set(Eigen_DIR "C:/Users/user/Downloads/OtherProject/DeepLearning/ncnn_windows/eigen-3.3.9/eigen-3.3.9")
+
+find_package(OpenCV REQUIRED)
+
+#set(ncnn_DIR "/home/hit/Softwares/ncnn/build/install/lib/cmake/ncnn")
+set(ncnn_DIR "C:/Users/user/Downloads/OtherProject/DeepLearning/ncnn_windows/ncnn/build/install/lib/cmake/ncnn")
+
+find_package(ncnn REQUIRED)
+if(NOT TARGET ncnn)
+    message(WARNING "ncnn NOT FOUND! Please set ncnn_DIR environment variable")
+else()
+    message("ncnn found")
+endif()
+
+set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O2")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2")
+
+include_directories(
+    ${project_include}
+    ${OpenCV_INCLUDE_DIRS}
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${Eigen_DIR}
+)
+
+add_executable(
+    yolov8-pose
+    src/BYTETracker.cpp
+    src/kalmanFilter.cpp
+    src/lapjv.cpp
+    src/utils.cpp
+    src/STrack.cpp
+    src/yolov8_pose.cpp
+    src/main.cpp
+)
+
+target_link_libraries(
+    yolov8-pose
+    ${OpenCV_LIBS}
+    ncnn
+)
