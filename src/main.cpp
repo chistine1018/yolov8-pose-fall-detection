@@ -103,6 +103,50 @@ int main(int argc, char** argv)
         outputVideo.release();
         cv::destroyAllWindows();
 
+    } else if (inputType == "camera") {
+        // 處理鏡頭
+        cv::VideoCapture cap(0); // 開啟默認鏡頭，0 表示第一個鏡頭
+        if (!cap.isOpened()) {
+            std::cerr << "Could not open the camera." << std::endl;
+            return -1;
+        }
+
+        int frame_width = static_cast<int>(cap.get(cv::CAP_PROP_FRAME_WIDTH));
+        int frame_height = static_cast<int>(cap.get(cv::CAP_PROP_FRAME_HEIGHT));
+        int fps = static_cast<int>(cap.get(cv::CAP_PROP_FPS));
+
+#ifdef Tracker
+        BYTETracker tracker(fps, 50);
+#endif
+
+        cv::Mat frame;
+        while (cap.read(frame)) {
+            std::vector<Object> objects;
+            yolov8Pose->detect_yolov8(frame, objects);
+
+#ifdef Tracker
+            std::vector<STrack> output_stracks = tracker.update(objects);
+#endif
+
+            cv::Mat result;
+#ifdef Tracker
+            yolov8Pose->detect_objects_tracker(frame, result, objects, output_stracks, SKELETON, KPS_COLORS, LIMB_COLORS);
+#else
+            yolov8Pose->detect_objects(frame, result, objects, SKELETON, KPS_COLORS, LIMB_COLORS);
+#endif
+            yolov8Pose->draw_fps(result);
+
+            cv::imshow("Camera Detection Result", result);
+
+            // 按 'q' 鍵退出
+            if (cv::waitKey(30) == 'q') {
+                break;
+            }
+        }
+
+        cap.release();
+        cv::destroyAllWindows();
+
     } else {
         std::cerr << "Invalid input type. Please use 'image' or 'video'." << std::endl;
         return -1;
