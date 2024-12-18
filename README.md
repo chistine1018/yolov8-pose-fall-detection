@@ -1,27 +1,30 @@
 ﻿# yolov8-pose-fall-detection
 
 
-參考
-https://github.com/zhahoi/yolov8-pose-fall-detection (yolov8 pose fall detection)
+## 參考
+https://github.com/zhahoi/yolov8-pose-fall-detection (yolov8 pose fall detection)  
 https://blog.csdn.net/qq_41572755/article/details/143047191 (yolov8 pose fall detection)
 
 
 Clone 後build folder先砍掉，自己照下術步驟重build
 
-事前準備下載CMake (3.31.1)
+事前準備下載CMake (3.31.1)  
+```
 $ cmake /V
-https://cmake.org/download/ 官網
+```
+
+https://cmake.org/download/ 官網  
 https://blog.csdn.net/qq_42598221/article/details/121952160 教學
 
-事前準備下載opencv (3.4.2)
-https://opencv.org/releases/ 官網
-https://blog.csdn.net/maizousidemao/article/details/81474834 教學
+事前準備下載opencv (3.4.2)  
+https://opencv.org/releases/ 官網  
+https://blog.csdn.net/maizousidemao/article/details/81474834 教學  
 
-事情準備下載Visual Studio (2022)
-https://visualstudio.microsoft.com/zh-hans/ 官網
+事情準備下載Visual Studio (2022)  
+https://visualstudio.microsoft.com/zh-hans/ 官網  
 https://blog.csdn.net/weixin_45725336/article/details/130754036?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_utm_term~default-0-130754036-blog-104966786.235%5Ev43%5Epc_blog_bottom_relevance_base1&spm=1001.2101.3001.4242.1&utm_relevant_index=3 教學 image
 
-事前準備下載Eigen
+事前準備下載Eigen  
 https://blog.csdn.net/OOFFrankDura/article/details/103586893
 
 
@@ -41,6 +44,7 @@ https://blog.csdn.net/OOFFrankDura/article/details/103586893
 
 8. yolov8-pose.exe.exe image test.jpg --> 成功預測跌倒圖片
 9. yolov8-pose.exe.exe video test.mp4 --> 成功預測跌倒影片
+10. yolov8-pose.exe camera -0 --> 開啟鏡頭
 
 ![output2](https://github.com/user-attachments/assets/0bab4251-be66-4f4c-94bc-d3d321074144)
 
